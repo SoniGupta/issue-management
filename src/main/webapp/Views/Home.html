@@ -1,0 +1,153 @@
+<div class="container">
+    <div class="container-fluid">
+
+        <p>
+
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Add Issues
+            </button>
+        </p>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Issue Details</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="form-horizontal">
+
+
+                            <div class="form-group ">
+                                <label for="input1" class=" col-xs-3 control-label">Title</label>
+
+                                <div class="col-xs-5">
+                                    <input type="text" name="Title" class="form-control " id="input1"
+                                           placeholder="Issue Title" ng-model="issues.title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input2" class=" col-xs-3 control-label">Description</label>
+
+                                <div class="col-xs-5">
+                                    <input type="text area" name="Description" class="form-control" id="input2"
+                                           placeholder="Description" ng-model="issues.description">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input3" class=" col-xs-3 control-label">Status</label>
+
+                                <div class="col-xs-5">
+                                    <input type="text" name="Status" class="form-control" id="input3"
+                                           placeholder="Issue Status" ng-model="issues.status">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input4" class="col-xs-3 control-label">Created Date</label>
+
+                                 <div class="input-group date col-xs-4" data-provide="datepicker">
+                                    <input type="text" name="Created Date" class="form-control dp" id="input4"
+                                           placeholder="created date" ng-model="issues.created_date">
+                                     <div class="input-group-addon">
+                                         <span class="glyphicon glyphicon-th"></span>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input5" class="col-xs-3 control-label">Emp_Id</label>
+
+                                <div class="col-xs-5">
+                                    <input type="text" name="Assignee" class="form-control" id="input5"
+                                           placeholder=" login employee id" ng-model="issues.emp_id">
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-4 ">
+        <select ng-options="option as option.name for option in statusOptions" ng-model="selected">
+        </select>
+    </div>
+    <div class="col-md-4 ">
+        <select ng-options="emp as emp.name for emp in empList" ng-model="selectedEmp">
+
+        </select>
+    </div>
+    <div class="input-group date col-md-4" data-provide="datepicker">
+        <input type="text" class="form-control dp" placeholder="Enter date to search" ng-model="selectedDate">
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-th"></span>
+        </div>
+    </div>
+
+
+</div>
+    </div>
+
+.
+<table class="table  table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Issue Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>created Date</th>
+        <th>Assignee</th>
+        <th>Actions</th>
+    </tr>
+    <tbody>
+    <tr ng-repeat="i in issueList|filter:customFilter |filter:empFilter|filter:dateFilter">
+        <td>{{i.issue_id}}</td>
+        <td>{{i.title}}</td>
+        <td>{{i.description}}</td>
+        <td>{{i.status}}</td>
+        <td>{{i.created_date}}</td>
+        <td>{{i.assignee.name}}</td>
+        <td>
+            <button type="button" data-toggle="modal" data-target="#myModal1" ng-click="showComments(i)">
+                Comments
+            </button>
+        </td>
+    </tr>
+    </tbody>
+    </thead>
+</table>
+
+
+<!--<script>$('.selectpicker').selectpicker({-->
+    <!--style: 'btn-default',-->
+    <!--size: 4-->
+<!--});</script>-->
+<script>
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    });
+    $('.dp').on('change', function(){
+        $('.datepicker').hide();
+    });
+</script>
+
+
+
+
+
+
+

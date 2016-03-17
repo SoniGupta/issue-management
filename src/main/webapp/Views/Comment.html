@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        <h1><strong>Issue Details {{issueId}}</strong></h1>
+
+        <form class="form-horizontal">
+
+
+            <div class="form-group">
+
+                <div>Issue Id : {{iss.issue_id}}</div>
+                <div> Issue Title : {{iss.title}}</div>
+                <div>Issue description: {{iss.description}}</div>
+                <div>Issue status: {{iss.status}}</div>
+                <div>Emp_Id: {{iss.assignee.id}}</div>
+
+            </div>
+            <h4>Leave a Comment!</h4>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Created Date</label>
+
+                <div class="input-group date col-sm-3" data-provide="datepicker">
+                    <input type="text" class="form-control testbox dp" id="input4"
+                           placeholder="created date" ng-model="comments.date">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label"><h3>Comments...!</h3></label>
+                <div class="col-sm-4">
+                <textarea class="form-control " name="message" placeholder="Type in your message" rows="5"
+                          style="margin-bottom:10px;" ng-model="comments.comment"></textarea>
+                </div>
+            </div>
+            <button class="btn btn-info" type="submit" ng-click="postcomments()">PostComment
+            </button>
+<div></div>
+            <div>
+                <table class="table  table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Comment Id</th>
+                        <th>Issue Id</th>
+                        <th>Comments</th>
+                        <th>Created Date</th>
+                        <th>Emp Id</th>
+                    </tr>
+                    <tbody>
+                    <tr ng-repeat="c in iss.commentList">
+                        <td>{{c.comment_id}}</td>
+                        <td>{{c.issue_id}}</td>
+                        <td>{{c.comment}}</td>
+                        <td>{{c.date}}</td>
+                        <td>{{c.emp_id}}</td>
+                    </tr>
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+
+        </form>
+    </div>
+    </div>
+
+
+
+<script>
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d',
+    });
+    $('.dp').on('change', function(){
+        $('.datepicker').hide();
+    });
+</script>
+

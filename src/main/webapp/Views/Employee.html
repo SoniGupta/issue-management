@@ -1,0 +1,57 @@
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        <h1><strong>Employee Registration Form</strong></h1>
+        <form class="form-horizontal">
+
+
+            <div class="form-group">
+                <label for="input1" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-4 ">
+                    <input type="text"  name="Name" class="form-control" id="input1" placeholder="Name" ng-model="employee.name" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input2" class="col-sm-3 control-label">Father's Name</label>
+                <div class="col-sm-4">
+                    <input type="text" name="Father's Name" class="form-control" id="input2" placeholder="Father's Name"  ng-model="employee.fatherName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input3" class="col-sm-3 control-label">Address</label>
+                <div class="col-sm-4">
+                    <input type="text" name ="Address" class="form-control" id="input3" placeholder="Address" ng-model="employee.address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input4" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-4">
+                    <input type="Email" name ="Email" class="form-control" id="input4" placeholder="Email" ng-model="employee.email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input5" class="col-sm-3 control-label">Phone No.</label>
+                <div class="col-sm-4">
+                    <input type="Integer" name ="Phone No." class="form-control" id="input5" placeholder="Phone No." ng-model="employee.phone">
+                </div>
+            </div>
+            <div>
+                <label class="col-sm-3 control-label">Gender</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" checked ng-model="employee.gender">
+                        Male
+                    </label>
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="Female" ng-model="employee.gender">
+                        Female
+                    </label>
+                </div>
+            </div>
+            <center>
+                <button class="btn btn-default" ng-click="submit()">Submit</button></center>
+        </form>
+    </div>
+</div>
+</div>
