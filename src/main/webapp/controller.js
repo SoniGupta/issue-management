@@ -169,7 +169,7 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
         $scope.comments.emp_id = response.id;
 
     });
-    $scope.comments = {issue_id: $scope.issueId, comment: '', date: ''};
+    $scope.comments = {issue_id: $scope.issue_id, comment: '', date: ''};
 
 
     $scope.postcomments = function () {
@@ -181,7 +181,7 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
                 $http({
                     url: "/issuedetails",
                     method: "GET",
-                    params: {"issue_id": $scope.issueId}
+                    params: {"issue_id": $scope.issue_id}
                 }).then(function (apiresponse) {
                         $scope.iss = apiresponse.data;
                     },
