@@ -7,5 +7,11 @@
       <schema-pattern>Management.*</schema-pattern>
       <default-schemas>Management.*</default-schemas>
     </data-source>
+    <data-source name="PostgreSQL - issue@localhost" uuid="5b45ea4a-1cef-49ff-a07d-d3725d530e4c">
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <schema-pattern>issue.pg_catalog issue.public</schema-pattern>
+      <default-schemas>issue.pg_catalog issue.public</default-schemas>
+    </data-source>
   </component>
 </project>

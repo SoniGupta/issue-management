@@ -6,7 +6,7 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
 
     $scope.save = function () {
         $http({
-            url: "http://localhost:8080/addissue",
+            url: "/addissue",
             method: "GET",
             params: $scope.issues
         }).then(function (updatedData) {
@@ -20,13 +20,13 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
 
         $scope.issues = " ";
     };
-    var url = "http://localhost:8080/user";
+    var url = "/user";
     $http.get(url).success(function (response) {
         $scope.issues.emp_id = response.id;
 
     });
 
-    var url = "http://localhost:8080/allissues";
+    var url = "/allissues";
     $http.get(url).success(function (response) {
         $scope.issueList = response;
     });
@@ -36,7 +36,7 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
     $scope.empList=[
         {employeeName:"All Employees"}
     ];
-    var url = 'http://localhost:8080/emp';
+    var url = '/emp';
     $http.get(url).success(function (response) {
         for(var i in response) {
             $scope.empList.push(response[i]);
@@ -124,7 +124,7 @@ issueApp.controller('EmpController', function ($scope, $http, $location) {
     $scope.submit = function () {
 
         $http({
-            url: "http://localhost:8080/addemp",
+            url: "/addemp",
             method: "GET",
             params: $scope.employee
         }).then(
@@ -140,7 +140,7 @@ issueApp.controller('EmpController', function ($scope, $http, $location) {
 
 
 issueApp.controller('ViewController', function ($scope, $http) {
-        var url = 'http://localhost:8080/emp';
+        var url = '/emp';
         $http.get(url).success(function (response) {
             $scope.empList = response;
         });
@@ -153,7 +153,7 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
     $scope.issue_id = $routeParams.issue_id;
 
     $http({
-        url: "http://localhost:8080/issuedetails",
+        url: "/issuedetails",
         method: "GET",
         params: {"issue_id": $scope.issue_id}
     }).then(function (apiresponse) {
@@ -164,7 +164,7 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
             alert('not success');
         });
 
-    var url = "http://localhost:8080/user";
+    var url = "/user";
     $http.get(url).success(function (response) {
         $scope.comments.emp_id = response.id;
 
@@ -174,12 +174,12 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
 
     $scope.postcomments = function () {
         $http({
-            url: " http://localhost:8080/addcomments",
+            url: "/addcomments",
             method: "GET",
             params: $scope.comments
         }).then(function (success) {
                 $http({
-                    url: "http://localhost:8080/issuedetails",
+                    url: "/issuedetails",
                     method: "GET",
                     params: {"issue_id": $scope.issueId}
                 }).then(function (apiresponse) {
@@ -207,7 +207,7 @@ issueApp.controller('HeaderController', function ($scope, $location, $http) {
         return viewLocation === $location.path();
     };
 
-    var url = "http://localhost:8080/user";
+    var url = "/user";
     $http.get(url).success(function (response) {
         $scope.user = response;
 
