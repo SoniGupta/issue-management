@@ -3,13 +3,26 @@
     <div class="col-md-6 col-md-offset-3">
 
         <h1><strong>Employee Registration Form</strong></h1>
+
         <form class="form-horizontal">
 
+            <div class="form-group">
+                <label for="input8" class="col-sm-3 control-label">Employee Name</label>
+                <div class="col-sm-4 ">
+                    <input type="text"  name="EmployeeName" class="form-control" id="input8" placeholder="EmployeeName" ng-model="employee.employeeName" >
+                </div>
+            </div>
 
             <div class="form-group">
-                <label for="input1" class="col-sm-3 control-label">Name</label>
+                <label for="input1" class="col-sm-3 control-label">UserName</label>
                 <div class="col-sm-4 ">
-                    <input type="text"  name="Name" class="form-control" id="input1" placeholder="Name" ng-model="employee.name" >
+                    <input type="text"  name="UserName" class="form-control" id="input1" placeholder="UserName" ng-model="employee.username" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input6" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-4 ">
+                    <input type="password"  name="Password" class="form-control" id="input6" placeholder="Password" ng-model="employee.password" >
                 </div>
             </div>
             <div class="form-group">
@@ -36,6 +49,18 @@
                     <input type="Integer" name ="Phone No." class="form-control" id="input5" placeholder="Phone No." ng-model="employee.phone">
                 </div>
             </div>
+            <div class="form-group">
+                <label for="input11" class="col-sm-3 control-label">Employee Role</label>
+                <div class="col-sm-4">
+                    <input type="text" name="Employee role" class="form-control" id="input11" placeholder="Enter Employee role"  ng-model="employee.role">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input7" class="col-sm-3 control-label">Enabled</label>
+                <div class="col-sm-4 ">
+                    <input type="Integer"  name="Enabled" class="form-control" id="input7" placeholder="1 for enabled ,0 for disabled" ng-model="employee.enabled" >
+                </div>
+            </div>
             <div>
                 <label class="col-sm-3 control-label">Gender</label>
                 <div class="radio">
@@ -48,6 +73,8 @@
                         Female
                     </label>
                 </div>
+
+
             </div>
             <center>
                 <button class="btn btn-default" ng-click="submit()">Submit</button></center>

@@ -2,7 +2,6 @@
     <div class="container-fluid">
 
         <p>
-
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 Add Issues
             </button>
@@ -29,6 +28,7 @@
                                            placeholder="Issue Title" ng-model="issues.title">
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="input2" class=" col-xs-3 control-label">Description</label>
 
@@ -57,11 +57,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input5" class="col-xs-3 control-label">Emp_Id</label>
-
-                                <div class="col-xs-5">
-                                    <input type="text" name="Assignee" class="form-control" id="input5"
-                                           placeholder=" login employee id" ng-model="issues.emp_id">
+                                <label class="col-xs-3 control-label">Emp_Id</label>
+                               <div class="col-xs-5">
+                                    {{issues.emp_id}}
                                 </div>
                             </div>
 
@@ -85,7 +83,7 @@
         </select>
     </div>
     <div class="col-md-4 ">
-        <select ng-options="emp as emp.name for emp in empList" ng-model="selectedEmp">
+        <select ng-options="emp as emp.employeeName for emp in empList" ng-model="selectedEmp">
 
         </select>
     </div>
@@ -113,13 +111,13 @@
         <th>Actions</th>
     </tr>
     <tbody>
-    <tr ng-repeat="i in issueList|filter:customFilter |filter:empFilter|filter:dateFilter">
+    <tr ng-repeat="i in issueList|filter:customFilter |filter:empFilter">
         <td>{{i.issue_id}}</td>
         <td>{{i.title}}</td>
         <td>{{i.description}}</td>
         <td>{{i.status}}</td>
         <td>{{i.created_date}}</td>
-        <td>{{i.assignee.name}}</td>
+        <td>{{i.assignee.employeeName}}</td>
         <td>
             <button type="button" data-toggle="modal" data-target="#myModal1" ng-click="showComments(i)">
                 Comments

@@ -20,21 +20,28 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
 
         $scope.issues = " ";
     };
+    var url = "http://localhost:8080/user";
+    $http.get(url).success(function (response) {
+        $scope.issues.emp_id = response.id;
+
+    });
 
     var url = "http://localhost:8080/allissues";
     $http.get(url).success(function (response) {
         $scope.issueList = response;
     });
 
+
+
     $scope.empList=[
-        {name:"All Employees"}
+        {employeeName:"All Employees"}
     ];
     var url = 'http://localhost:8080/emp';
     $http.get(url).success(function (response) {
         for(var i in response) {
             $scope.empList.push(response[i]);
         }
-        $scope.empList.push({name:"No Assignee"})
+        $scope.empList.push({employeeName:"No Assignee"})
     });
 
     $scope.selectedEmp = $scope.empList[0];
@@ -73,12 +80,12 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
     };
 
     $scope.empFilter = function (i) {
-        if($scope.selectedEmp.name === "All Employees")
+        if($scope.selectedEmp.employeeName === "All Employees")
         {
             return true;
         }
         if(i.assignee == null) {
-            if($scope.selectedEmp.name === "No Assignee") {
+            if($scope.selectedEmp.employeeName === "No Assignee") {
                 return true;
             }else {
                 return false;
@@ -92,6 +99,7 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
     };
 
     $scope.selectedDate = "";
+
     $scope.dateFilter=function(i){
         if($scope.selectedDate == "")
         {
@@ -111,7 +119,7 @@ issueApp.controller('IssueController', function ($scope, $http, $location) {
 
 
 issueApp.controller('EmpController', function ($scope, $http, $location) {
-    $scope.employee = {name: '', fatherName: '', address: '', email: '', phone: '', gender: ''};
+    $scope.employee = {employeeName: '', username: '',password: '', fatherName: '', address: '', email: '', phone: '', gender: '',enabled: ''};
 
     $scope.submit = function () {
 
@@ -141,12 +149,13 @@ issueApp.controller('ViewController', function ($scope, $http) {
 
 
 issueApp.controller('CommentsController', function ($scope, $http, $routeParams) {
-    $scope.issueId = $routeParams.issueId;
+
+    $scope.issue_id = $routeParams.issue_id;
 
     $http({
         url: "http://localhost:8080/issuedetails",
         method: "GET",
-        params: {"issue_id": $scope.issueId}
+        params: {"issue_id": $scope.issue_id}
     }).then(function (apiresponse) {
             $scope.iss = apiresponse.data;
             //console.log(apiresponse);//to print data on console
@@ -155,11 +164,19 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
             alert('not success');
         });
 
+    var url = "http://localhost:8080/user";
+    $http.get(url).success(function (response) {
+        $scope.comments.emp_id = response.id;
 
-    $scope.comments = {issue_id: $scope.issueId, comment: '', date: '', emp_id: 5};
+    });
+    $scope.comments = {issue_id: $scope.issueId, comment: '', date: ''};
+
+
     $scope.postcomments = function () {
         $http({
-            url: " http://localhost:8080/addcomments", method: "GET", params: $scope.comments
+            url: " http://localhost:8080/addcomments",
+            method: "GET",
+            params: $scope.comments
         }).then(function (success) {
                 $http({
                     url: "http://localhost:8080/issuedetails",
@@ -185,8 +202,16 @@ issueApp.controller('CommentsController', function ($scope, $http, $routeParams)
 });
 
 
-issueApp.controller('HeaderController', function ($scope, $location) {
+issueApp.controller('HeaderController', function ($scope, $location, $http) {
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
+
+    var url = "http://localhost:8080/user";
+    $http.get(url).success(function (response) {
+        $scope.user = response;
+
+    });
 });
+
+

@@ -18,7 +18,7 @@ issueApp.config(['$routeProvider', function($routeProvider) {
             activetab: 'EmpDetails'
         }).
 
-        when('/Comments/:issueId', {
+        when('/Comments/:issue_id', {
             templateUrl: 'Views/Comment.html',
             controller: 'CommentsController',
             activetab: 'Comments'

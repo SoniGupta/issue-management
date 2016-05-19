@@ -1,7 +1,6 @@
 package FirstApp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -111,13 +110,6 @@ public class  IssueEntity {
         this.commentList = commentList;
     }
 
-    //    public Integer getemp_id() {
-//        return emp_id;
-//    }
-//
-//    public void setemp_id(Integer emp_id) {
-//        this.emp_id=emp_id;
-//    }
 
 
 }

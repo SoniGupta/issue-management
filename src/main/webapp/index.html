@@ -45,13 +45,13 @@
             </button>
             <!-- <a class="navbar-brand" href="#">Issue Management</a>-->
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="HeaderController">
             <ul class="nav navbar-nav">
                 <li ng-class="{active: isActive('/Issue')}">
                     <a href="#/Issue">Issues </a>
                 </li>
 
-                <li class="dropdown" >
+                <li ng-show="user.userRoleEntity.role=='Admin'" class="dropdown" >
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true"
                        aria-expanded="false">Users <span class="caret"></span></a>
@@ -66,9 +66,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
-                <li class="active"><a href="signin.html">Logout <span class="sr-only">(current)</span></a></li>
-
+                <li class="active"><a> Welcome {{user.username}}!!!<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

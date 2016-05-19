@@ -2,17 +2,26 @@ package FirstApp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "employee")
-public class EmployeeEntity{
+public class EmployeeEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_id")
     private Integer id;
 
     @NotNull
-    private String name;
+    @Column(name="employee_name")
+    private String employeeName;
+
+    @NotNull
+    private String username;
+
+    @NotNull
+    private String password;
 
     @NotNull
     @Column(name = "father_name")
@@ -31,16 +40,38 @@ public class EmployeeEntity{
     @NotNull
     private String gender;
 
-    public EmployeeEntity() {
-    }
+    @NotNull
+    private String enabled;
 
-    public EmployeeEntity( String name, String fatherName, String address, String email, String phone, String gender) {
-        this.name = name;
+    @OneToOne(mappedBy = "employee", fetch = FetchType.EAGER)
+    private UserRoleEntity userRoleEntity;
+
+    public EmployeeEntity(EmployeeEntity employeeEntity) {
+        this(employeeEntity.getEmployeeName(),employeeEntity.getUsername(),employeeEntity.getPassword(),employeeEntity.getFatherName(),
+                employeeEntity.getAddress(),employeeEntity.getEmail(),employeeEntity.getPhone(),
+                employeeEntity.getGender(),employeeEntity.getEnabled());
+
+//        this.username = employeeEntity.getusername;
+//        this.password=employeeEntity.getpassword;
+//        this.fatherName = employeeEntity.getfatherName;
+//        this.address = employeeEntity.getaddress;
+//        this.email = employeeEntity.getemail;
+//        this.phone = employeeEntity.getphone;
+//        this.gender = employeeEntity.getgender;
+//        this.enabled=employeeEntity.getenabled;
+    }
+    public EmployeeEntity(){}
+
+    public EmployeeEntity( String employeeName,String username,String password, String fatherName, String address, String email, String phone, String gender,String enabled)
+{       this.employeeName=employeeName;
+        this.username = username;
+        this.password=password;
         this.fatherName = fatherName;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.gender = gender;
+        this.enabled=enabled;
     }
 
     public Integer getId() {
@@ -51,13 +82,7 @@ public class EmployeeEntity{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getFatherName() {
         return fatherName;
@@ -97,5 +122,45 @@ public class EmployeeEntity{
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public UserRoleEntity getUserRoleEntity() {
+        return userRoleEntity;
+    }
+
+    public void setUserRoleEntity(UserRoleEntity userRoleEntity) {
+        this.userRoleEntity = userRoleEntity;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 }

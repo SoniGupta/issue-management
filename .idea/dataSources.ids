@@ -7,15 +7,33 @@
     </database-info>
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <schema name="" catalog="Management"/>
+    <table name="comment" schema="" catalog="Management" type="TABLE">
+      <column name="comment_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="issue_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="comment" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="comment_id"/>
+      <foreign-key name="comment_ibfk_1" columns="issue_id" ref-table="issue" ref-schema="" ref-catalog="Management" ref-columns="issue_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="comment_ibfk_2" columns="emp_id" ref-table="employee" ref-schema="" ref-catalog="Management" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_b381tyj2pmnu0ymtkkbcayhr2" table="issue_comment_list" schema="" catalog="Management" columns="comment_list"/>
+    </table>
     <table name="employee" schema="" catalog="Management" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="employee_name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
       <column name="father_name" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
       <column name="address" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="email" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <column name="phone_no" sqlType="VARCHAR" precision="13" scale="0" nullable="true" jdbcType="12"/>
       <column name="gender" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
+      <column name="enabled" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="emp_id"/>
+      <exported-key name="comment_ibfk_2" table="comment" schema="" catalog="Management" columns="emp_id"/>
+      <exported-key name="issue_ibfk_1" table="issue" schema="" catalog="Management" columns="emp_id"/>
+      <exported-key name="fk_emp_id" table="user_roles" schema="" catalog="Management" columns="emp_id"/>
+      <index name="unique_username" unique="true" columns="username"/>
     </table>
     <table name="issue" schema="" catalog="Management" type="TABLE">
       <column name="issue_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -23,9 +41,28 @@
       <column name="description" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <column name="created_date" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="assignee" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="created_by" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="issue_id"/>
+      <foreign-key name="issue_ibfk_1" columns="emp_id" ref-table="employee" ref-schema="" ref-catalog="Management" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="comment_ibfk_1" table="comment" schema="" catalog="Management" columns="issue_id"/>
+      <exported-key name="FK_cva23o96ispmb4yef8m8kfnbn" table="issue_comment_list" schema="" catalog="Management" columns="issue"/>
+    </table>
+    <table name="issue_comment_list" schema="" catalog="Management" type="TABLE">
+      <column name="issue" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="comment_list" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <foreign-key name="FK_b381tyj2pmnu0ymtkkbcayhr2" columns="comment_list" ref-table="comment" ref-schema="" ref-catalog="Management" ref-columns="comment_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_cva23o96ispmb4yef8m8kfnbn" columns="issue" ref-table="issue" ref-schema="" ref-catalog="Management" ref-columns="issue_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="UK_b381tyj2pmnu0ymtkkbcayhr2" unique="true" columns="comment_list"/>
+      <index name="FK_cva23o96ispmb4yef8m8kfnbn" unique="false" columns="issue"/>
+    </table>
+    <table name="user_roles" schema="" catalog="Management" type="TABLE">
+      <column name="user_role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="emp_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="role" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_role_id"/>
+      <foreign-key name="fk_emp_id" columns="emp_id" ref-table="employee" ref-schema="" ref-catalog="Management" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="uni_emp_id_role" unique="true" columns="role,emp_id"/>
+      <index name="fk_emp__idx" unique="false" columns="emp_id"/>
     </table>
   </data-source>
 </component>

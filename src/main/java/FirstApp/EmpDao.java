@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface EmpDao extends JpaRepository<EmployeeEntity, Integer> {
 
-
+    public EmployeeEntity findByUsername(String username);
 
 
 }

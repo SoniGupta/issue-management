@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "comment")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class commentEntity
 {
     @Id
@@ -27,10 +25,6 @@ public class commentEntity
     public void setDate(String date) {
         this.date = date;
     }
-    //    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "emp_id")
-//    private EmployeeEntity employee;
-//
 
 
     public commentEntity()
@@ -78,13 +72,5 @@ public class commentEntity
     }
 
 
-
-//    public EmployeeEntity getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(EmployeeEntity employee) {
-//        this.employee = employee;
-//    }
 
 }
